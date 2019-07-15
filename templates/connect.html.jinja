@@ -1,0 +1,21 @@
+{% extends "layout.html.jinja" %}
+
+{% block title %}
+{% endblock %}
+
+{% block main %}
+<form action="/connect" method="post">
+  <div class="form-group">
+    <label for="plex-url">Plex URL</label>
+    <input type="url" class="form-control" name="plex-url" id="plex-url" aria-describedby="url-help" placeholder="Plex URL">
+    <small id="url-help" class="form-text text-muted">Enter the full URL for the server.</small>
+  </div>
+  <div class="form-group">
+    <label for="plex-token">Plex Token</label>
+    <input type="text" class="form-control" id="plex-token" name="plex-token" aria-describedby="token-help" placeholder="Plex Token">
+    <small id="token-help" class="form-text text-muted"> <a  href="https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/"> How to find token.</a> </small>
+  </div>
+  <button type="submit" class="btn btn-primary">Connect</button>
+  <button type="button" onclick="location.href='/about'" class="btn btn-secondary">About PlexWeb</button>
+</form>
+{% endblock %}

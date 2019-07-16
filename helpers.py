@@ -30,4 +30,8 @@ def check_server(url, token):
 
 
 def check_activity(plex):
-    playing = [client for client in plex.sessions()]
+    return [client for client in plex.sessions()]
+
+
+def get_movies(plex, query):
+    return plex.search(query)

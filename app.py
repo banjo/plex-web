@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
-from helpers import login_required, check_server, get_users
+from helpers import get_movies, login_required, check_server, get_users, check_activity
 from plexapi.server import PlexServer
 
 # init flask
@@ -64,7 +64,32 @@ def tryagain():
     return render_template("tryagain.html.jinja")
 
 
-@app.route('/update_activity', methods=["POST"])
+@app.route('/update_activity', methods=["GET"])
 def update_activity():
-    user = request.form.get("user")
-    
+    # get the username from the form
+    user = request.args.get("username")
+
+    # get all active users from plex
+    activity = check_activity(session["plex"])
+
+    for playing in activity:
+        if str(playing.usernames[0]) == (user):
+            active_user = {"user": user,
+                           "show": playing.grandparentTitle if playing.type == "episode" else playing.title,
+                           "type": playing.type,
+                           "title": playing.title}
+            return jsonify(active_user)
+
+    return jsonify(False)
+
+
+@app.route('/search', methods=["GET"])
+def search():
+    query = request.args.get("query")
+
+    movies = get_movies(session["plex"], query)
+
+    movies = [movie.title for movie in movies]
+    print(movies)
+
+    return jsonify(movies=movies)

@@ -6,31 +6,54 @@ Server
 
 {% block main %}
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <h1 class="display-4">Users</h1>
+    <div class="row">
+        <div class="col">
+            <h1 class="display-4">Users</h1>
 
-      <br>
+            <br>
 
-      <p class="lead">
-        Users connected to the owner of the server. They may not have access to the libraries.
-      </p>
+            <p class="lead">
+                Users connected to the owner of the server. They may not have access to the libraries. Press the button
+                to check what they are currently watching.
+            </p>
 
-      <br>
+            <br>
 
-      <ul class="list-group" id="user-list">
-        {% for user in users %}
-        <li class="list-group-item">{{user}}</li>
-        {% endfor %}
-      </ul>
+            <ul class="list-group" id="user-list">
+                {% for user in users %}
+                <li class="list-group-item">{{user}}</li>
+                {% endfor %}
+            </ul>
 
-      <br>
+            <br>
 
-      <button type=button class="btn btn-info" onclick=update_activity()>Check activity</button>
+            <button type=button class="btn btn-info" onclick=update_activity()>Check activity</button>
 
+        </div>
+        <div class="col">
+            <h1 class="display-4">Movies</h1>
+
+            <br>
+
+            <p class="lead">
+                Search for movies and shows in your plex library. No episodes will show.
+            </p>
+
+            <br>
+            <div class="input-group mb-3">
+                <input type="text" id="query" class="form-control" placeholder="Search" aria-label="Search">
+            </div>
+            <button type=button class="btn btn-info" onclick=search() >Search</button>
+
+            <br>
+
+            <div id="search-table">
+                <ul class="list-group" id="query-list">
+                </ul>
+            </div>
+
+
+
+        </div>
     </div>
-    <div class="col">
-      2 of 2
-    </div>
-  </div>
-  {% endblock %}
+    {% endblock %}

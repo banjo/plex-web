@@ -1,16 +1,36 @@
 {% extends "layout.html.jinja" %}
 
 {% block title %}
+Server
 {% endblock %}
 
 {% block main %}
 <div class="container">
   <div class="row">
     <div class="col">
-      1 of 2
+      <h1 class="display-4">Users</h1>
+
+      <br>
+
+      <p class="lead">
+        Users connected to the owner of the server. They may not have access to the libraries.
+      </p>
+
+      <br>
+
+      <ul class="list-group" id="user-list">
+        {% for user in users %}
+        <li class="list-group-item">{{user}}</li>
+        {% endfor %}
+      </ul>
+
+      <br>
+
+      <button type=button class="btn btn-info" onclick=update_activity()>Check activity</button>
+
     </div>
     <div class="col">
       2 of 2
     </div>
   </div>
-{% endblock %}
+  {% endblock %}

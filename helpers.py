@@ -17,15 +17,17 @@ def login_required(f):
     return decorated_function
 
 
-def get_users():
-    plex = PlexServer(session["plex_url"], session["plex_token"])
-    account = plex.myPlexAccount()
-    users = [user.title for user in account.users()]
+def get_users(plex):
+    return [user.title for user in plex.myPlexAccount().users() if user.friend]
 
 
 def check_server(url, token):
     try:
         plex = PlexServer(url, token)
-        return True
+        return plex
     except:
         return False
+
+
+def check_activity(plex):
+    playing = [client for client in plex.sessions()]

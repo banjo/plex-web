@@ -1,0 +1,42 @@
+{% extends "layout.html.jinja" %}
+
+{% block title %}
+- Playlists
+{% endblock %}
+
+{% block main %}
+
+<h1 class="display-4">Playlist</h1>
+
+<br>
+
+<p class="lead">
+    All playlists connected to the owner of the plex server.
+</p>
+
+<br>
+
+<div class="row">
+    <div class="col">
+
+        <div class="list-group" id="list-tab" role="tablist">
+            {% for playlist in playlists %}
+            <a class="list-group-item list-group-item-action" data-toggle="list" id="{{playlist.id}}-button" href="#{{playlist.id}}"
+                role="tab" onClick="content(this)">{{playlist.title}}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col">
+        <div class="tab-content" id="nav-tabContent">
+            {% for playlist in playlists %}
+            <div class="tab-pane" id="{{playlist.id}}" role="tabpanel">
+            {{playlist.title}}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

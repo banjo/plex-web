@@ -1,7 +1,7 @@
 {% extends "layout.html.jinja" %}
 
 {% block title %}
-Server
+ - Server
 {% endblock %}
 
 {% block main %}
@@ -13,9 +13,10 @@ Server
             <br>
 
             <p class="lead">
-                Users connected to the owner of the server. They may not have access to the libraries. Press the button
-                to check what they are currently watching.
+                Press the button to see if anyone is currently active. Name of show/movie will be shown.
             </p>
+
+            <button id=activity-button type=button class="btn btn-info" onclick=update_activity()>Check activity</button>
 
             <br>
 
@@ -24,10 +25,6 @@ Server
                 <li class="list-group-item">{{user}}</li>
                 {% endfor %}
             </ul>
-
-            <br>
-
-            <button type=button class="btn btn-info" onclick=update_activity()>Check activity</button>
 
         </div>
         <div class="col">
@@ -39,21 +36,17 @@ Server
                 Search for movies and shows in your plex library. No episodes will show.
             </p>
 
-            <br>
             <div class="input-group mb-3">
                 <input type="text" id="query" class="form-control" placeholder="Search" aria-label="Search">
+                 <button id="search-button" type=button class="btn btn-info" onclick=search()>Search</button>
             </div>
-            <button type=button class="btn btn-info" onclick=search() >Search</button>
 
-            <br>
 
             <div id="search-table">
                 <ul class="list-group" id="query-list">
                 </ul>
             </div>
-
-
-
         </div>
     </div>
+
     {% endblock %}

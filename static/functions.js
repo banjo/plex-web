@@ -16,7 +16,7 @@ function update_activity() {
 
     }
 
-}
+};
 
 function search() {
     let query = document.getElementById("query").value;
@@ -38,5 +38,11 @@ function search() {
         }
 
     })
+
+};
+
+function content(button) {
+    let buttonID = button.getAttribute("href").substring(1);
+    let playlistName = button.innerHTML;
 
 };

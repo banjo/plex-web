@@ -35,3 +35,7 @@ def check_activity(plex):
 
 def get_movies(plex, query):
     return plex.search(query)
+
+
+def get_playlists(plex):
+    return plex.playlists()

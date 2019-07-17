@@ -39,3 +39,17 @@ def get_movies(plex, query):
 
 def get_playlists(plex):
     return plex.playlists()
+
+
+def get_playlist_movies(plex, playlist):
+    movies = plex.playlist(playlist)
+
+    movie_list = []
+
+    for movie in movies.items():
+        movie_list.append({"title": movie.title,
+                           "thumb": movie.thumb,
+                           "year": movie.year,
+                           "rating": movie.audienceRating})
+
+    return movie_list

@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
-from helpers import get_movies, login_required, check_server, get_users, check_activity, get_playlists
+from helpers import get_users, check_server, check_activity, get_movies, get_playlists, get_playlist_movies, login_required
 from plexapi.server import PlexServer
 
 # init flask
@@ -65,7 +65,7 @@ def playlists():
 
         playlists.append({"title": p_list.title,
                           "id": f'playlist-{i}',
-                        })
+                          })
 
     return render_template("playlists.html.jinja", playlists=playlists)
 
@@ -106,3 +106,11 @@ def search():
     movies = get_movies(session["plex"], query)
     movies = [movie.title for movie in movies]
     return jsonify(movies=movies)
+
+
+@app.route('/playdata', methods=["GET"])
+def playdata():
+    playlist = request.args.get("playlist")
+    movies = get_playlist_movies(session["plex"], playlist)
+
+    return jsonify(movies)

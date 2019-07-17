@@ -17,20 +17,25 @@
 <br>
 
 <div class="row">
-    <div class="col">
+    <div class="col-4">
 
         <div class="list-group" id="list-tab" role="tablist">
             {% for playlist in playlists %}
-            <a class="list-group-item list-group-item-action" data-toggle="list" id="{{playlist.id}}-button" href="#{{playlist.id}}"
-                role="tab" onClick="content(this)">{{playlist.title}}</a>
+            <a class="list-group-item list-group-item-action" data-toggle="list" id="{{playlist.id}}-button"
+                href="#{{playlist.id}}" role="tab" onClick="content(this)">{{playlist.title}}</a>
             {% endfor %}
         </div>
     </div>
-    <div class="col">
+    <div class="col-8">
         <div class="tab-content" id="nav-tabContent">
             {% for playlist in playlists %}
             <div class="tab-pane" id="{{playlist.id}}" role="tabpanel">
-            {{playlist.title}}
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+
+                </div>
             </div>
             {% endfor %}
         </div>

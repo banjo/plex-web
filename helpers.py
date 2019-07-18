@@ -48,8 +48,12 @@ def get_playlist_movies(plex, playlist):
 
     for movie in movies.items():
         movie_list.append({"title": movie.title,
-                           "thumb": movie.thumb,
+                           "guid": movie.guid[26:],
                            "year": movie.year,
                            "rating": movie.audienceRating})
 
     return movie_list
+
+
+def get_sections(plex):
+    return [section.title for section in plex.library.sections() if section.type == "movie"]

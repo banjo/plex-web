@@ -1,0 +1,85 @@
+{% extends "layout.html.jinja" %}
+
+{% block title %}
+- Add Playlist
+{% endblock %}
+
+{% block main %}
+
+<h1 class="display-4">Add Playlist</h1>
+<br>
+<p class="lead">
+    New playlists can be added by scraping an already created IMDb list. Go to the web link of a list (like <a
+        href="https://www.imdb.com/list/ls026173135/" target="_blank">this</a>) and
+    copy the list ID from the URL.
+</p>
+<br>
+<form>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="imdb-ls">IMDb list</label>
+                    <input type="text" class="form-control" id="imdb-ls" placeholder="ls026173135"
+                        aria-describedby="listHelp">
+                    <small id="listHelp" class="form-text text-muted">Get ID from the list URL.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="imdb-ls">Playlist name</label>
+                    <input type="text" class="form-control" id="playlist-name" placeholder="Reddit Top 250"
+                        aria-describedby="nameHelp">
+                    <small id="nameHelp" class="form-text text-muted">The name that the playlist will have on
+                        Plex.</small>
+                </div>
+
+                <div class="form-group">
+                    <label aria-describedby="sectionHelp" for="select-section">Plex sections</label>
+                    <select class="form-control" id="select-section">
+                        {% for section in data.sections %}
+                        <option>{{section}}</option>
+                        {% endfor %}
+                    </select>
+                    <small id="sectionHelp" class="form-text text-muted">Which Plex library section the playlist
+                        will use.</small>
+                </div>
+
+                <div>
+                    <button id="addPlaylistButton" type="button" class="btn btn-primary">Add playlist</button>
+                    <div id="load-playlist" class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <label for="user-form">Users</label>
+                <div id=user-form>
+                    {% for user in data.users %}
+                    <div class="form-check">
+                        <input name="user-checkbox" class="form-check-input" type="checkbox" value="{{user}}"
+                            id="{{user}}-id">
+                        <label class="form-check-label" for="{{user}}-id">
+                            {{user}}
+                        </label>
+                    </div>
+                    {% endfor %}
+                    <br>
+                    <button onClick="selectAllUsers(this)" id="select-all-users" type="button"
+                        class="btn btn-secondary btn-sm">Select
+                        all</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- alerts -->
+        <div id="playlist-failed" class="alert alert-danger" role="alert">
+            <strong>Failed!</strong> <br> Something went wrong. Could not add the playlist to plex. Please try again.
+        </div>
+
+        <div id="playlist-success" class="alert alert-success" role="alert">
+            <strong>Success!</strong><br>You have successfully added the playlist.
+        </div>
+
+    </div>
+</form>
+{% endblock %}

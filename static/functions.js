@@ -1,3 +1,4 @@
+// user activity
 function update_activity() {
 
     let list_element = document.getElementById("user-list");
@@ -18,6 +19,7 @@ function update_activity() {
 
 };
 
+// search movie
 function search() {
     let query = document.getElementById("query").value;
 
@@ -41,6 +43,7 @@ function search() {
 
 };
 
+// get movies in playlist
 function content(button) {
     let buttonID = button.getAttribute("href").substring(1);
     let playlistName = button.innerHTML;
@@ -48,6 +51,7 @@ function content(button) {
 
     // create table
     let tbl = document.createElement('table');
+    tbl.setAttribute("id", "movie-table")
     tbl.classList.add('table')
 
     // create parts of table
@@ -88,13 +92,19 @@ function content(button) {
 
         for (let i = 0; i < data.length; i++) {
             movie = data[i];
+            let imdbLink = "https://www.imdb.com/title/" + movie["guid"];
 
             let row = document.createElement('tr');
             row.setAttribute("scope", "col");
 
             // add title
             let title = document.createElement('td');
-            title.innerHTML = movie["title"];
+            let aTitle = document.createElement('a');
+            aTitle.innerHTML = movie["title"];
+            aTitle.setAttribute('href', imdbLink);
+            aTitle.setAttribute('target', "_blank");
+
+            title.appendChild(aTitle);
             row.appendChild(title);
 
             // add year
@@ -114,3 +124,59 @@ function content(button) {
     })
 
 };
+
+// select all button
+function selectAllUsers(self) {
+    let checkboxes = document.getElementsByName('user-checkbox');
+
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = true;
+    }
+};
+
+// add playlist to plex
+$(document).ready(function () {
+    $("#addPlaylistButton").click(function () {
+
+        // Hide previous alerts
+        $(".alert").hide();
+
+        let imdb = document.getElementById('imdb-ls').value;
+        let name = document.getElementById('playlist-name').value;
+        let section = document.getElementById('select-section').value;
+
+        let users = document.getElementsByName('user-checkbox');
+        let checkedUsers = [];
+
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].checked) {
+                checkedUsers.push(users[i].value);
+            };
+        };
+
+        $.post("/addplaylisttoplex", {
+            imdb: imdb,
+            name: name,
+            section: section,
+            users: JSON.stringify(checkedUsers)
+        }, function (data) {
+
+            if (data) {
+                $('#playlist-success').show();
+            } else {
+                $('#playlist-failed').show();
+            }
+
+        });
+    });
+});
+
+// show spinner while adding playlist
+$(document).ready(function () {
+
+    $(document).ajaxStart(function () {
+        $("#load-playlist").css('visibility', 'visible');
+    }).ajaxStop(function () {
+        $("#load-playlist").css('visibility', 'hidden');
+    })
+})

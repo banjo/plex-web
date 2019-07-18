@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
-from helpers import get_users, check_server, check_activity, get_movies, get_playlists, get_playlist_movies, login_required
+from helpers import get_users, check_server, check_activity, get_movies, get_playlists, get_playlist_movies, login_required, get_sections
+from playlist import add_playlist_to_plex
 from plexapi.server import PlexServer
+import json
 
 # init flask
 app = Flask(__name__)
@@ -70,6 +72,19 @@ def playlists():
     return render_template("playlists.html.jinja", playlists=playlists)
 
 
+@app.route('/addplaylist')
+@login_required
+def addplaylist():
+
+    sections = get_sections(session["plex"])
+    users = get_users(session["plex"])
+
+    data = {"sections": sections,
+            "users": users}
+
+    return render_template('addplaylist.html', data=data)
+
+
 @app.route('/disconnect')
 def disconnect():
     session.clear()
@@ -114,3 +129,23 @@ def playdata():
     movies = get_playlist_movies(session["plex"], playlist)
 
     return jsonify(movies)
+
+
+@app.route('/addplaylisttoplex', methods=["POST"])
+def addplaylisttoplex():
+    link = "https://www.imdb.com/list/"
+
+    imdb = request.form.get('imdb')
+    name = request.form.get('name')
+    section = request.form.get('section')
+    users = json.loads(request.form.get('users'))
+
+    success = False
+
+    try:
+        add_playlist_to_plex(session["plex"], link + imdb, name, section, users)
+        success = True
+    except:
+        success = False
+
+    return jsonify(success)

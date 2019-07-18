@@ -6,3 +6,18 @@
 #activity-button {
     margin-bottom: 60px;
 }
+
+#load-playlist {
+    margin-left: 20px;
+    visibility: hidden;
+}
+
+#playlist-failed {
+    display: none;
+    margin-top: 20px;
+}
+
+#playlist-success {
+    display: none;
+    margin-top: 20px;
+}

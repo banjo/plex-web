@@ -143,7 +143,8 @@ def addplaylisttoplex():
     success = False
 
     try:
-        add_playlist_to_plex(session["plex"], link + imdb, name, section, users)
+        add_playlist_to_plex(
+            session["plex"], link + imdb, name, section, users)
         success = True
     except:
         success = False

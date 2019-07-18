@@ -1,4 +1,4 @@
-// user activity
+// Update user activity
 function update_activity() {
 
     let list_element = document.getElementById("user-list");

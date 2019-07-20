@@ -8,6 +8,7 @@ HEADERS = {"Accept-Language": "en-US,en;q=0.5"}
 
 
 def add_playlist_to_plex(plex, link, name, section, users):
+
     movies = scrape(link)
     playlist = add_playlist(movies, plex, name)
 
@@ -97,4 +98,7 @@ def get_movie(movie, plex):
 
 def copy_to_users(playlist, users):
     for user in users:
-        playlist.copyToUser(user)
+        try:
+            playlist.copyToUser(user)
+        except:
+            raise NameError(f"{user} does not have access to the library.")

@@ -5,6 +5,7 @@ from helpers import get_users, check_server, check_activity, get_movies, get_pla
 from playlist import add_playlist_to_plex
 from plexapi.server import PlexServer
 import json
+import traceback
 
 # init flask
 app = Flask(__name__)
@@ -140,13 +141,22 @@ def addplaylisttoplex():
     section = request.form.get('section')
     users = json.loads(request.form.get('users'))
 
-    success = False
+    data = {"success": False,
+            "error": "Something went wrong. Could not add the playlist to plex. Please try again."}
 
     try:
         add_playlist_to_plex(
             session["plex"], link + imdb, name, section, users)
-        success = True
-    except:
-        success = False
+        data["success"] = True
+    except IndexError:
+        # gets raised when the list cannot be scraped.
+        data["error"] = "Wrong list ID, could not retrieve data."
+    except NameError as e:
+        # gets raised when a user cannot access the library
+        data["error"] = str(e)
+    except Exception as e:
+        # print error message to trace error
+        print(traceback.print_exc())
 
-    return jsonify(success)
+
+    return jsonify(data)

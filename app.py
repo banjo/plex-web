@@ -11,10 +11,12 @@ import traceback
 app = Flask(__name__)
 
 # use filesystem instead of cookies for sessions
-app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+# app.config["SESSION_FILE_DIR"] = mkdtemp()
+app.config["SECRET_KEY"] = "07id2CFJSpRY5sQ3KEoZTjb6hoNfSFcI&&/a..#¤%//aaborpp"
+# app.config["SESSION_PERMANENT"] = False
+# app.config['SESSION_TYPE'] = 'memcached'
+# app.config["SESSION_TYPE"] = "filesystem"
+# Session(app)
 
 
 @app.route("/connect", methods=["GET", "POST"])
@@ -27,12 +29,9 @@ def connect():
         plex_token = request.form.get("plex-token")
 
         # check if plex server is available
-        plex = check_server(plex_url, plex_token)
-
-        if plex:
+        if check_server(plex_url, plex_token):
             session["plex_token"] = plex_token
             session["plex_url"] = plex_url
-            session["plex"] = plex
             return redirect("/")
         else:
             return redirect("/tryagain")
@@ -52,7 +51,7 @@ def index():
 @app.route('/server')
 @login_required
 def server():
-    users = get_users(session["plex"])
+    users = get_users(session["plex_url"], session["plex_token"])
     return render_template("server.html.jinja", users=users)
 
 
@@ -60,7 +59,7 @@ def server():
 @login_required
 def playlists():
 
-    plex_playlists = get_playlists(session["plex"])
+    plex_playlists = get_playlists(session["plex_url"], session["plex_token"])
 
     playlists = []
 
@@ -77,8 +76,8 @@ def playlists():
 @login_required
 def addplaylist():
 
-    sections = get_sections(session["plex"])
-    users = get_users(session["plex"])
+    sections = get_sections(session["plex_url"], session["plex_token"])
+    users = get_users(session["plex_url"], session["plex_token"])
 
     data = {"sections": sections,
             "users": users}
@@ -103,7 +102,7 @@ def update_activity():
     user = request.args.get("username")
 
     # get all active users from plex
-    activity = check_activity(session["plex"])
+    activity = check_activity(session["plex_url"], session["plex_token"])
 
     for playing in activity:
         if str(playing.usernames[0]) == (user):
@@ -119,7 +118,7 @@ def update_activity():
 @app.route('/search', methods=["GET"])
 def search():
     query = request.args.get("query")
-    movies = get_movies(session["plex"], query)
+    movies = get_movies(session["plex_url"], session["plex_token"], query)
     movies = [movie.title for movie in movies]
     return jsonify(movies=movies)
 
@@ -127,7 +126,8 @@ def search():
 @app.route('/playdata', methods=["GET"])
 def playdata():
     playlist = request.args.get("playlist")
-    movies = get_playlist_movies(session["plex"], playlist)
+    movies = get_playlist_movies(
+        session["plex_url"], session["plex_token"], playlist)
 
     return jsonify(movies)
 
@@ -146,7 +146,7 @@ def addplaylisttoplex():
 
     try:
         add_playlist_to_plex(
-            session["plex"], link + imdb, name, section, users)
+            session["plex_url"], session["plex_token"], link + imdb, name, section, users)
         data["success"] = True
     except IndexError:
         # gets raised when the list cannot be scraped.
@@ -157,6 +157,5 @@ def addplaylisttoplex():
     except Exception as e:
         # print error message to trace error
         print(traceback.print_exc())
-
 
     return jsonify(data)

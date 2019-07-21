@@ -161,9 +161,11 @@ $(document).ready(function () {
             users: JSON.stringify(checkedUsers)
         }, function (data) {
 
-            if (data) {
+            if (data["success"]) {
                 $('#playlist-success').show();
             } else {
+                // update error message
+                $('#error-message').html(data["error"]);
                 $('#playlist-failed').show();
             }
 

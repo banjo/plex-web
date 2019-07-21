@@ -10,6 +10,7 @@ import traceback
 # init flask
 app = Flask(__name__)
 
+#! TODO: Add no permanent session
 # use filesystem instead of cookies for sessions
 # app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SECRET_KEY"] = "07id2CFJSpRY5sQ3KEoZTjb6hoNfSFcI&&/a..#¤%//aaborpp"

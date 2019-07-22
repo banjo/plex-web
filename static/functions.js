@@ -1,23 +1,48 @@
-// Update user activity
+// Update user activity function
 function update_activity() {
+    let li = $("[name='active-users']");
+    let users = [];
 
-    let list_element = document.getElementById("user-list");
-    let li = list_element.getElementsByTagName("li");
+    for (let i = 0; i < li.length; i++) {
+        users.push(li[i].id);
+    };
 
-    for (let i = 0; i < li.length; ++i) {
-        user = li[i].innerHTML;
-
-        $.get("/update_activity?username=" + user, function (data) {
-            if (data) {
-                li[i].classList.add("active");
-                li[i].innerHTML = data["user"] + " - " + data["show"];
-            }
+    $.post("/update_activity", {
+            users: users
+        },
+        function (data) {
+            // isee if user is active
+            for (let user in data) {
+                let element = document.getElementById(user);
+                if (data[user]["active"]) {
+                    // update if active
+                    element.classList.add("active");
+                    element.innerHTML = user + " - " + data[user]["show"];
+                } else {
+                    // update if not active
+                    element.classList.remove("active");
+                    element.innerHTML = user;
+                }
+            };
 
         });
 
-    }
-
 };
+
+// Update activity on click
+$(document).ready(function () {
+    $("#activity-button").click(function () {
+        update_activity()
+    })
+})
+
+
+// Update activity on refresh
+$("#user-list").ready(function () {
+    update_activity()
+});
+
+
 
 // search movie
 function search() {

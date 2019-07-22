@@ -91,23 +91,25 @@ def tryagain():
     return render_template("tryagain.html.jinja")
 
 
-@app.route('/update_activity', methods=["GET"])
+@app.route('/update_activity', methods=["POST"])
 def update_activity():
     # get the username from the form
-    user = request.args.get("username")
+    users = request.form.getlist("users[]")
+    user_dict = {}
 
     # get all active users from plex
     activity = check_activity(session["plex_url"], session["plex_token"])
+    for user in users:
+        # set standard to false
+        user_dict[user] = {"active": False}
 
-    for playing in activity:
-        if str(playing.usernames[0]) == (user):
-            active_user = {"user": user,
-                           "show": playing.grandparentTitle if playing.type == "episode" else playing.title,
-                           "type": playing.type,
-                           "title": playing.title}
-            return jsonify(active_user)
+        for playing in activity:
+            if str(playing.usernames[0]) == user:
+                user_dict[user] = {"user": user,
+                                       "show": playing.grandparentTitle if playing.type == "episode" else playing.title,
+                                       "active": True}
 
-    return jsonify(False)
+    return jsonify(user_dict)
 
 
 @app.route('/search', methods=["GET"])

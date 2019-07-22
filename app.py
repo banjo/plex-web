@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
-from flask_session import Session
 from tempfile import mkdtemp
 from helpers import get_users, check_server, check_activity, get_movies, get_playlists, get_playlist_movies, login_required, get_sections
 from playlist import add_playlist_to_plex
@@ -10,14 +9,9 @@ import traceback
 # init flask
 app = Flask(__name__)
 
-#! TODO: Add no permanent session
-# use filesystem instead of cookies for sessions
-# app.config["SESSION_FILE_DIR"] = mkdtemp()
+# configurations for session
 app.config["SECRET_KEY"] = "07id2CFJSpRY5sQ3KEoZTjb6hoNfSFcI&&/a..#¤%//aaborpp"
-# app.config["SESSION_PERMANENT"] = False
-# app.config['SESSION_TYPE'] = 'memcached'
-# app.config["SESSION_TYPE"] = "filesystem"
-# Session(app)
+app.config["SESSION_PERMANENT"] = False
 
 
 @app.route("/connect", methods=["GET", "POST"])

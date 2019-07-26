@@ -1,13 +1,13 @@
 # PlexWeb
 
-PlexWeb is a web manager for Plex servers, and mostly playlists. Connect to your server via your URL and token to access features like viewing current activity and adding playlists based on IMDb lists.
+PlexWeb is a web app for Plex servers. Connect to your server via your URL and token to access features like viewing current activity and adding playlists based on IMDb lists. Based on Flask.
 
 ## Site
 Access PlexWeb [here](https://plex-web.herokuapp.com/).
 
 ## Download and run
 
-- Install Python
+- Install [Python](https://www.python.org/) and [Git](https://git-scm.com/)
 
 ```bash
 # Clone repository

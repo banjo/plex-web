@@ -25,6 +25,11 @@ $ pip3 install -r requirements.txt
 $ flask run
 ```
 
+## Docker
+[christronyxyocum](https://github.com/christronyxyocum) created a Docker image which can be accessed [here](https://hub.docker.com/r/tronyx/plex-web). 
+
+Github link [here](https://github.com/christronyxyocum/docker-plex-web).
+
 ## Features
 
 * Sign in to your Plex server.

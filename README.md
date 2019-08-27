@@ -1,9 +1,55 @@
-# PlexWeb
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 
-PlexWeb is a web app for Plex servers. Connect to your server via your URL and token to access features like viewing current activity and adding playlists based on IMDb lists. Based on Flask.
+<br />
+<p align="center">
+<!--
+  <a href="https://github.com/github_username/repo">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+-->
+  <h3 align="center">PlexWeb</h3>
 
-## Site
-Access PlexWeb [here](https://plex-web.herokuapp.com/).
+  <p align="center">
+    Add IMDb playlists to your Plex server
+    <br />
+    <a href="https://github.com/banjoanton/plex-web"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/github_username/repo">View Website</a>
+    ·
+    <a href="https://github.com/github_username/repo/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/github_username/repo/issues">Request Feature</a>
+  </p>
+</p>
+
+## Table of contents
+- [Table of contents](#table-of-contents)
+- [About](#about)
+  - [Built with](#built-with)
+- [Download and run](#download-and-run)
+- [Features](#features)
+- [Info](#info)
+- [Docker](#docker)
+- [Contributing](#contributing)
+
+## About
+![PlexWeb web app](https://i.imgur.com/nQo9o0f.png)
+
+PlexWeb is a web manager for Plex servers. Connect to your server via your URL and token to access features like viewing current activity and adding playlists based on IMDb lists.
+
+### Built with
+* Python
+  * Flask
+  * Beautiful Soup
+  * PlexAPI
+* HTML
+* CSS
+  * Bootstrap
+* Javascript
+  * jQuery
 
 ## Download and run
 
@@ -24,12 +70,6 @@ $ pip3 install -r requirements.txt
 # Run flask server
 $ flask run
 ```
-
-## Docker
-[christronyxyocum](https://github.com/christronyxyocum) created a Docker image which can be accessed [here](https://hub.docker.com/r/tronyx/plex-web). 
-
-Github link [here](https://github.com/christronyxyocum/docker-plex-web).
-
 ## Features
 
 * Sign in to your Plex server.
@@ -55,5 +95,19 @@ This project was based on **lack of playlists in Plex**. When you have a movie l
 
 The other features of the web app are just neat implementations that enhances the management of playlists.
 
+## Docker
+[christronyxyocum](https://github.com/christronyxyocum) created a Docker image which can be accessed [here](https://hub.docker.com/r/tronyx/plex-web).
+
+Github link [here](https://github.com/christronyxyocum/docker-plex-web).
+
+
 ## Contributing
 Pull requests are welcome. Feel free to add anything.
+
+<!-- LINKS AND IMAGES -->
+[stars-shield]: https://img.shields.io/github/stars/banjoanton/plex-web
+[stars-url]: https://github.com/banjoanton/plex-web/stargazers
+[issues-shield]: https://img.shields.io/github/issues/banjoanton/plex-web
+[issues-url]: https://github.com/banjoanton/plex-web/issues
+[forks-shield]: https://img.shields.io/github/forks/banjoanton/plex-web
+[forks-url]: https://github.com/banjoanton/plex-web/network/members

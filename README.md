@@ -4,11 +4,10 @@
 
 <br />
 <p align="center">
-<!--
-  <a href="https://github.com/github_username/repo">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+
+  <a href="https://github.com/banjoanton/plex-web">
+    <img src="https://i.imgur.com/WjsN7MC.png" alt="Logo" width="150" height="150">
   </a>
--->
   <h3 align="center">PlexWeb</h3>
 
   <p align="center">
@@ -17,11 +16,11 @@
     <a href="https://github.com/banjoanton/plex-web"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo">View Website</a>
+    <a href="https://github.com/banjoanton/plex-web">View Website</a>
     ·
-    <a href="https://github.com/github_username/repo/issues">Report Bug</a>
+    <a href="https://github.com/banjoanton/plex-web/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo/issues">Request Feature</a>
+    <a href="https://github.com/banjoanton/plex-web/issues">Request Feature</a>
   </p>
 </p>
 

@@ -104,9 +104,9 @@ Github link [here](https://github.com/christronyxyocum/docker-plex-web).
 Pull requests are welcome. Feel free to add anything.
 
 <!-- LINKS AND IMAGES -->
-[stars-shield]: https://img.shields.io/github/stars/banjoanton/plex-web
-[stars-url]: https://github.com/banjoanton/plex-web/stargazers
-[issues-shield]: https://img.shields.io/github/issues/banjoanton/plex-web
-[issues-url]: https://github.com/banjoanton/plex-web/issues
-[forks-shield]: https://img.shields.io/github/forks/banjoanton/plex-web
-[forks-url]: https://github.com/banjoanton/plex-web/network/members
+[stars-shield]: https://img.shields.io/github/stars/banjo/plex-web
+[stars-url]: https://github.com/banjo/plex-web/stargazers
+[issues-shield]: https://img.shields.io/github/issues/banjo/plex-web
+[issues-url]: https://github.com/banjo/plex-web/issues
+[forks-shield]: https://img.shields.io/github/forks/banjo/plex-web
+[forks-url]: https://github.com/banjo/plex-web/network/members

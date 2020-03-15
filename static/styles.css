@@ -21,6 +21,10 @@
     display: none;
     margin-top: 20px;
 }
+#failed-movies-alert {
+    display: none;
+    margin-top: 20px;
+}
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 

@@ -10,10 +10,12 @@ HEADERS = {"Accept-Language": "en-US,en;q=0.5"}
 def add_playlist_to_plex(url, token, link, name, section, users):
 
     movies = scrape(link)
-    playlist = add_playlist(movies, url, token, name)
+    playlist, failed_movies = add_playlist(movies, url, token, name)
 
     if len(users) > 0:
         copy_to_users(playlist, users)
+
+    return failed_movies
 
 
 def scrape(website):
@@ -62,6 +64,7 @@ def scrape(website):
 
 def add_playlist(name_list, url, token, name):
     movie_list = []
+    failed_movies = []
 
     for movie in name_list:
 
@@ -73,6 +76,7 @@ def add_playlist(name_list, url, token, name):
 
         # loop if it can't find the movie
         if temp is False:
+            failed_movies.append(movie["title"])
             continue
 
         # add to list if it can find it
@@ -81,7 +85,7 @@ def add_playlist(name_list, url, token, name):
     # create playlist
     playlist = PlexServer(url, token).createPlaylist(name, movie_list)
 
-    return playlist
+    return playlist, failed_movies
 
 
 def get_movie(movie, url, token):

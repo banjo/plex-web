@@ -184,7 +184,21 @@ $(document).ready(function() {
             },
             function(data) {
                 if (data["success"]) {
+                    // create list for missing movies
+                    let list = document.createElement("div");
+
+                    data["failed"].forEach(function(movie) {
+                        let item = document.createElement("li");
+
+                        item.appendChild(document.createTextNode(movie));
+
+                        list.appendChild(item);
+                    });
+
+                    document.getElementById("failed-movies").appendChild(list);
+
                     $("#playlist-success").show();
+                    $("#failed-movies-alert").show();
                 } else {
                     // update error message
                     $("#error-message").html(data["error"]);

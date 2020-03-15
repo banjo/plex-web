@@ -106,8 +106,8 @@ def update_activity():
         for playing in activity:
             if str(playing.usernames[0]) == user:
                 user_dict[user] = {"user": user,
-                                       "show": playing.grandparentTitle if playing.type == "episode" else playing.title,
-                                       "active": True}
+                                   "show": playing.grandparentTitle if playing.type == "episode" else playing.title,
+                                   "active": True}
 
     return jsonify(user_dict)
 
@@ -139,12 +139,15 @@ def addplaylisttoplex():
     users = json.loads(request.form.get('users'))
 
     data = {"success": False,
-            "error": "Something went wrong. Could not add the playlist to plex. Please try again."}
+            "error": "Something went wrong. Could not add the playlist to plex. Please try again.",
+            "failed": []}
 
     try:
-        add_playlist_to_plex(
+        failed_movies = add_playlist_to_plex(
             session["plex_url"], session["plex_token"], link + imdb, name, section, users)
         data["success"] = True
+        data["error"] = None
+        data["failed"] = failed_movies
     except IndexError:
         # gets raised when the list cannot be scraped.
         data["error"] = "Wrong list ID, could not retrieve data."

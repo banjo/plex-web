@@ -4,7 +4,6 @@
 
 <br />
 <p align="center">
-
   <a href="https://github.com/banjoanton/plex-web">
     <img src="https://i.imgur.com/WjsN7MC.png" alt="Logo" width="150" height="150">
   </a>
@@ -13,14 +12,9 @@
   <p align="center">
     Add IMDb playlists to your Plex server
     <br />
-    <a href="https://github.com/banjoanton/plex-web"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/banjoanton/plex-web">View Website</a>
+    <a href="https://plex-web.herokuapp.com/">View Website</a>
     ·
-    <a href="https://github.com/banjoanton/plex-web/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/banjoanton/plex-web/issues">Request Feature</a>
+    <a href="https://github.com/banjo/plex-web/issues/new">Report Bug or Request Feature</a>
   </p>
 </p>
 
@@ -34,12 +28,12 @@
 - [Docker](#docker)
 - [Contributing](#contributing)
 
-## About
-![PlexWeb web app](https://i.imgur.com/nQo9o0f.png)
+## :clapper: About
+![PlexWeb web app](https://i.imgur.com/H08RhfC.png)
 
 PlexWeb is a web manager for Plex servers. Connect to your server via your URL and token to access features like viewing current activity and adding playlists based on IMDb lists.
 
-### Built with
+### 📋 Built with
 * Python
   * Flask
   * Beautiful Soup
@@ -50,7 +44,7 @@ PlexWeb is a web manager for Plex servers. Connect to your server via your URL a
 * Javascript
   * jQuery
 
-## Download and run
+## ☁️ Download and run
 
 - Install [Python](https://www.python.org/) and [Git](https://git-scm.com/)
 
@@ -69,7 +63,7 @@ $ pip3 install -r requirements.txt
 # Run flask server
 $ flask run
 ```
-## Features
+## ✔️ Features
 
 * Sign in to your Plex server.
   * Use **url** and **token**.
@@ -87,20 +81,20 @@ $ flask run
   * Choose name
   * **Choose users** that should receive the playlists as well
 
-## Info
+## :information_source:	 Info
 This is my **final project** in the **[CS50](https://www.edx.org/course/cs50s-introduction-to-computer-science)** course. It includes most of the programming languages that are covered in the course; HTML, Python, Javascript and Jinja. Python is used as back-end with Flask, and Javascript is used to make the page dynamic. The page design hasn't been the main focus, but Bootstrap has been used to make it look as good as possible.
 
 This project was based on **lack of playlists in Plex**. When you have a movie library, the built in selection are pretty much useless. Therefore, I created a simple web app that adds playlists based on scraping a choosen IMDb list (like [this](https://www.imdb.com/list/ls026173135/)). You can add any list you find, and the web is full of them. All movies that you have in your library that matches the movies in the list will be added to a playlist.
 
 The other features of the web app are just neat implementations that enhances the management of playlists.
 
-## Docker
+## :whale: Docker
 [christronyxyocum](https://github.com/christronyxyocum) created a Docker image which can be accessed [here](https://hub.docker.com/r/tronyx/plex-web).
 
 Github link [here](https://github.com/christronyxyocum/docker-plex-web).
 
 
-## Contributing
+## 🔧 Contributing
 Pull requests are welcome. Feel free to add anything.
 
 <!-- LINKS AND IMAGES -->

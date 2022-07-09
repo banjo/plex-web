@@ -18,6 +18,10 @@
   </p>
 </p>
 
+## Disclaimer
+
+This project was created when I first started with programming. It does not work anymore since the Plex API has changed. I mostly leave it here for nostalgic reasons. 
+
 ## Table of contents
 - [Table of contents](#table-of-contents)
 - [About](#about)
